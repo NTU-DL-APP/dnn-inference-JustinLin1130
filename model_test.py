@@ -109,8 +109,10 @@ def test_softmax():
     assert np.all(y >= 0) and np.all(y <= 1), "Output not in [0,1]"
     assert np.isclose(np.sum(y), 1.0), "Output does not sum to 1"
 
+
 def test_relu():
     x = np.array([-2, -1, 0, 1, 2])
     y = sum(relu(x))
 
     assert y == 3
+
