@@ -6,16 +6,20 @@ def relu(x):
     # Rectified Linear Unit: max(0, x)
     return np.maximum(0, x)
 
+
 def softmax(x):
-    # Numerically stable softmax
+    x = np.asarray(x)  # 確保輸入是 numpy array
     if x.ndim == 1:
-        x = x - np.max(x)
+        x = x - np.max(x)  # 防止 overflow
         exp_x = np.exp(x)
         return exp_x / np.sum(exp_x)
-    else:
-        x = x - np.max(x, axis=1, keepdims=True)
+    elif x.ndim == 2:
+        x = x - np.max(x, axis=1, keepdims=True)  # 每列最大值
         exp_x = np.exp(x)
         return exp_x / np.sum(exp_x, axis=1, keepdims=True)
+    else:
+        raise ValueError("Softmax only supports 1D or 2D input.")
+
 
 # === Flatten ===
 def flatten(x):
